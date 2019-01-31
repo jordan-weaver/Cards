@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final Deck deck = new Deck();
+        deck.Shuffle();
 
         final ImageButton cardImage = (ImageButton) findViewById(R.id.card_image);
         cardImage.setOnClickListener(new View.OnClickListener() {

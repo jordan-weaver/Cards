@@ -1,6 +1,7 @@
 package com.example.cards;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Deck {
     private final int DECK_SIZE = 52;
@@ -23,5 +24,18 @@ public class Deck {
             return cards.remove(0);
         } else
             throw new IllegalArgumentException("Attempted to remove card from empty deck");
+    }
+
+    public void Shuffle() {
+        Random rand = new Random();
+        int a, b;
+        Card swap;
+        for(int i = 0; i < 500; ++i) {
+            a = rand.nextInt(DECK_SIZE);
+            b = rand.nextInt(DECK_SIZE);
+            swap = cards.get(a);
+            cards.set(a, cards.get(b));
+            cards.set(b, swap);
+        }
     }
 }
