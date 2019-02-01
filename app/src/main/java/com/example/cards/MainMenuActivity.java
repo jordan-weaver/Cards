@@ -18,10 +18,16 @@ public class MainMenuActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Start MainActivity.java
                 startActivity(new Intent(MainMenuActivity.this, MainActivity.class));
             }
         });
 
+        final Button battleButton = (Button) findViewById(R.id.battle_button);
+        battleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainMenuActivity.this, BattleActivity.class));
+            }
+        });
     }
 }
