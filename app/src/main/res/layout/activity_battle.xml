@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/main_layout">
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -14,15 +15,34 @@
         android:id="@+id/cpu_grid">
         <ImageView
             android:id="@+id/cpu_hand"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:src="@drawable/card_back" />
         <ImageView
             android:id="@+id/cpu_play"
             android:layout_width="100dp"
-            android:layout_height="150dp"
-            android:src="@drawable/card_back"
-            />
+            android:layout_height="match_parent" />
+    </GridLayout>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        android:columnCount="3"
+        android:rowCount="1"
+        android:id="@+id/cpu_tie_grid"
+        android:layout_below="@+id/cpu_grid">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:id="@+id/cpu_tie_one"/>
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:id="@+id/cpu_tie_two"/>
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:id="@+id/cpu_tie_three"/>
     </GridLayout>
     <GridLayout
         android:layout_width="match_parent"
@@ -34,9 +54,10 @@
             android:id="@+id/player_hand"
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="10dp"
-            android:scaleType="centerInside"
             android:src="@drawable/card_back" />
+        <ImageView
+            android:id="@+id/player_play"
+            android:layout_width="100dp"
+            android:layout_height="match_parent" />
     </GridLayout>
 </RelativeLayout>

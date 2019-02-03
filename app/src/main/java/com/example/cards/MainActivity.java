@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         cardImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Card c = deck.PopDeck();
+                Card c = deck.Pop();
                 cardImage.setImageResource(
                         getResources().getIdentifier(c.getFileNameOfCardImage(),
                                 "drawable", getPackageName()));

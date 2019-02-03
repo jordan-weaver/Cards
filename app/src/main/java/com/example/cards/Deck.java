@@ -7,7 +7,7 @@ public class Deck {
     private final int DECK_SIZE = 52;
     private final Boolean JOKERS = false;
 
-    private ArrayList<Card> cards;
+    protected ArrayList<Card> cards;
 
     Deck() {
         cards = new ArrayList<Card>(DECK_SIZE);
@@ -19,12 +19,37 @@ public class Deck {
         }
     }
 
-    Card PopDeck() {
+    Deck (int size) {
+        cards = new ArrayList<Card>(size);
+    }
+
+    int Size() {
+        return cards.size();
+    }
+
+    Card Pop() {
         if (cards.size() > 0) {
             return cards.remove(0);
         } else
             throw new IllegalArgumentException("Attempted to remove card from empty deck");
     }
+
+    Card PopBack() {
+        if (cards.size() > 0) {
+            return cards.remove(cards.size() - 1);
+        } else
+            throw new IllegalArgumentException("Attempted to remove card from empty deck");
+    }
+
+    void Push(Card c) {
+        cards.add(0, c);
+    }
+
+    void PushBack(Card c) {
+        cards.add(c);
+    }
+
+
 
     public void Shuffle() {
         Random rand = new Random();

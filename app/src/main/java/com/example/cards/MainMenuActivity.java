@@ -29,5 +29,13 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(new Intent(MainMenuActivity.this, BattleActivity.class));
             }
         });
+
+        final Button solitaireButton = (Button) findViewById(R.id.solitaire_button);
+        solitaireButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainMenuActivity.this, SolitaireActivity.class));
+            }
+        });
     }
 }
