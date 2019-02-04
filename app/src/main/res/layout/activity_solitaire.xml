@@ -13,33 +13,64 @@
 
         <ImageView
             android:id="@+id/deck"
-            android:layout_width="65dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:src="@drawable/card_back" />
+
+        <RelativeLayout
+            android:id="@+id/draw"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="30dp"
+            android:layout_weight=".8">
+            <ImageView
+                android:id="@+id/draw_one"
+                android:layout_width="55dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/ace_of_diamonds"/>
+            <ImageView
+                android:id="@+id/draw_two"
+                android:layout_width="55dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ace_of_hearts"/>
+            <ImageView
+                android:id="@+id/draw_three"
+                android:layout_width="55dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ace_of_spades"/>
+
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/foundation_one"
-            android:layout_width="65dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="80dp"
+            android:layout_weight="1"
             android:src="@drawable/card_back" />
 
         <ImageView
             android:id="@+id/foundation_two"
-            android:layout_width="65dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:src="@drawable/card_back" />
 
         <ImageView
             android:id="@+id/foundation_three"
-            android:layout_width="65dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:src="@drawable/card_back" />
 
         <ImageView
             android:id="@+id/foundation_four"
-            android:layout_width="65dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:src="@drawable/card_back" />
 
     </LinearLayout>
@@ -48,19 +79,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
-
         <RelativeLayout
+            android:id="@+id/column_one"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="1dp">
-
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:id="@+id/test_card"/>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/column_two"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -72,6 +103,7 @@
                 android:src="@drawable/ace_of_clubs"/>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/column_three"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -83,6 +115,7 @@
                 android:src="@drawable/ace_of_clubs"/>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/column_four"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -94,6 +127,7 @@
                 android:src="@drawable/ace_of_clubs"/>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/column_five"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -105,6 +139,7 @@
                 android:src="@drawable/ace_of_clubs"/>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/column_six"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -116,6 +151,7 @@
                 android:src="@drawable/ace_of_clubs"/>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/column_seven"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -124,7 +160,14 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:layout_alignParentTop="true"
                 android:src="@drawable/ace_of_clubs"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/two_of_clubs"/>
         </RelativeLayout>
 
     </LinearLayout>
