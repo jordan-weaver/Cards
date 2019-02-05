@@ -85,10 +85,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="1dp">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:id="@+id/test_card"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/column_two"
@@ -96,11 +92,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="1dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:src="@drawable/ace_of_clubs"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/column_three"
@@ -108,11 +99,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="1dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:src="@drawable/ace_of_clubs"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/column_four"
@@ -120,11 +106,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="1dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:src="@drawable/ace_of_clubs"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/column_five"
@@ -132,11 +113,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="1dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:src="@drawable/ace_of_clubs"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/column_six"
@@ -144,11 +120,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="1dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:src="@drawable/ace_of_clubs"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/column_seven"
@@ -156,18 +127,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="1dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_alignParentTop="true"
-                android:src="@drawable/ace_of_clubs"/>
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/two_of_clubs"/>
         </RelativeLayout>
 
     </LinearLayout>
