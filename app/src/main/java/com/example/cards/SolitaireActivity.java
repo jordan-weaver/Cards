@@ -1,5 +1,6 @@
 package com.example.cards;
 
+import android.widget.ImageView;
 import android.content.ClipData;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -7,20 +8,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class SolitaireActivity extends AppCompatActivity {
 
+    Deck deck;
     ImageView deckView;
-    ImageView foundationOneView, foundationTwoView,
+    CardView foundationOneView, foundationTwoView,
                 foundationThreeView, foundationFourView;
     RelativeLayout columnOne, columnTwo, columnThree, columnFour,
                 columnFive, columnSix, columnSeven;
+    RelativeLayout draw;
 
     void initVars() {
+        deck = new Deck();
         deckView = findViewById(R.id.deck);
         foundationOneView = findViewById(R.id.foundation_one);
         foundationTwoView = findViewById(R.id.foundation_two);
@@ -33,6 +35,7 @@ public class SolitaireActivity extends AppCompatActivity {
         columnFive = findViewById(R.id.column_five);
         columnSix = findViewById(R.id.column_six);
         columnSeven = findViewById(R.id.column_seven);
+        draw = findViewById(R.id.draw_layout);
     }
 
     @Override
@@ -41,15 +44,10 @@ public class SolitaireActivity extends AppCompatActivity {
         setContentView(R.layout.activity_solitaire);
 
         initVars();
-        Deck deck = new Deck();
-        deck.Shuffle();
-        Deal(deck);
+        deck.shuffle();
+        Deal();
 
-        Card c = deck.Pop();
-        //ImageView testCardView = findViewById(R.id.test_card);
-        //testCardView.setImageResource(getResources().getIdentifier(c.getFileNameOfCardImage(),
-        //      "drawable", getPackageName()));
-        //testCardView.setOnTouchListener(onTouchListener);
+        deckView.setOnTouchListener(deckOnTouchListener);
         foundationOneView.setOnDragListener(foundationDragListener);
         foundationTwoView.setOnDragListener(foundationDragListener);
         foundationThreeView.setOnDragListener(foundationDragListener);
@@ -57,13 +55,13 @@ public class SolitaireActivity extends AppCompatActivity {
 
     }
 
-    void Deal(Deck deck) {
+    void Deal() {
         Card c;
         RelativeLayout column;
         int numColumns = 7;
         for(int i = 0; i < numColumns; ++i) {
             for(int j = numColumns - i; j > 0; --j) {
-                c = deck.Pop();
+                c = deck.pop();
                 switch(j + i) {
                     case 1:
                         column = columnOne;
@@ -89,17 +87,40 @@ public class SolitaireActivity extends AppCompatActivity {
                     default:
                         throw new IllegalArgumentException("Attempting to place card in illegal column " + (j + i));
                 }
-                // IF STATEMENT FOR FACEDOWN
-                ImageView imageView = new ImageView(this);
-                imageView.setOnTouchListener(onTouchListener);
-                imageView.setImageResource(getResources().getIdentifier(c.getFileNameOfCardImage(),
-                        "drawable", getPackageName()));
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(column.getLayoutParams());
+                CardView cardView = new CardView(this, c);
+                if(j != 1)
+                    cardView.setFaceDown(true);
+                cardView.setOnTouchListener(onTouchListener);
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
                 params.setMargins(0, i * 20, 0, 0);
-                column.addView(imageView);
+                cardView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                cardView.setAdjustViewBounds(true);
+                cardView.setLayoutParams(params);
+                column.addView(cardView);
             }
         }
     }
+
+    View.OnTouchListener deckOnTouchListener = new View.OnTouchListener(){
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                if(deck.size() <= 0) {
+                    /* Re-add drawlist to deck */
+                }
+
+
+
+                if(deck.size() <= 0) {
+                    deckView.setImageResource(R.drawable.card_blank);
+                }
+                return true;
+            }
+            return false;
+        }
+    };
 
     View.OnTouchListener onTouchListener = new View.OnTouchListener(){
 
@@ -134,7 +155,7 @@ public class SolitaireActivity extends AppCompatActivity {
                     break;
                 case DragEvent.ACTION_DROP:
                     Toast.makeText(getApplicationContext(), "Dopped on", Toast.LENGTH_SHORT).show();
-                    ((ImageView)v).setImageDrawable(((ImageView)view).getDrawable());
+                    ((CardView)v).setImageDrawable(((CardView)view).getDrawable());
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
                     boolean validMove = false;

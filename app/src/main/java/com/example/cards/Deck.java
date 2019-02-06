@@ -23,35 +23,37 @@ public class Deck {
         cards = new ArrayList<Card>(size);
     }
 
-    int Size() {
+    int size() {
         return cards.size();
     }
 
-    Card Pop() {
+    Card pop() {
         if (cards.size() > 0) {
             return cards.remove(0);
-        } else
-            throw new IllegalArgumentException("Attempted to remove card from empty deck");
+        } else {
+            return null;
+        }
     }
 
-    Card PopBack() {
+    Card popBack() {
         if (cards.size() > 0) {
             return cards.remove(cards.size() - 1);
-        } else
-            throw new IllegalArgumentException("Attempted to remove card from empty deck");
+        } else {
+            return null;
+        }
     }
 
-    void Push(Card c) {
+    void push(Card c) {
         cards.add(0, c);
     }
 
-    void PushBack(Card c) {
+    void pushBack(Card c) {
         cards.add(c);
     }
 
 
 
-    public void Shuffle() {
+    public void shuffle() {
         Random rand = new Random();
         int a, b;
         Card swap;

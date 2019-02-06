@@ -13,12 +13,12 @@
         android:rowCount="1"
         android:layout_alignParentTop="true"
         android:id="@+id/cpu_grid">
-        <ImageView
+        <CardView
             android:id="@+id/cpu_hand"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:src="@drawable/card_back" />
-        <ImageView
+        <CardView
             android:id="@+id/cpu_play"
             android:layout_width="100dp"
             android:layout_height="match_parent" />
@@ -31,15 +31,15 @@
         android:rowCount="1"
         android:id="@+id/cpu_tie_grid"
         android:layout_below="@+id/cpu_grid">
-        <ImageView
+        <CardView
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:id="@+id/cpu_tie_one"/>
-        <ImageView
+        <CardView
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:id="@+id/cpu_tie_two"/>
-        <ImageView
+        <CardView
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:id="@+id/cpu_tie_three"/>
@@ -50,12 +50,12 @@
         android:orientation="horizontal"
         android:id="@+id/player_grid"
         android:layout_alignParentBottom="true">
-        <ImageView
+        <CardView
             android:id="@+id/player_hand"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:src="@drawable/card_back" />
-        <ImageView
+        <CardView
             android:id="@+id/player_play"
             android:layout_width="100dp"
             android:layout_height="match_parent" />

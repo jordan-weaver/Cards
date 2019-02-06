@@ -7,15 +7,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import java.util.ArrayList;
-
 public class BattleActivity extends AppCompatActivity {
 
-    ImageView cpuHandView ;
-    ImageView cpuPlayView ;
-    ImageView playerHandView;
-    ImageView playerPlayView;
-    ImageView[] cpuTieView;
+    CardView cpuHandView ;
+    CardView cpuPlayView ;
+    CardView playerHandView;
+    CardView playerPlayView;
+    CardView[] cpuTieView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +24,7 @@ public class BattleActivity extends AppCompatActivity {
          cpuPlayView = findViewById(R.id.cpu_play);
          playerHandView = findViewById(R.id.player_hand);
          playerPlayView = findViewById(R.id.player_play);
-         cpuTieView = new ImageView[]{findViewById(R.id.cpu_tie_one),
+         cpuTieView = new CardView[]{findViewById(R.id.cpu_tie_one),
             findViewById(R.id.cpu_tie_two), findViewById(R.id.cpu_tie_three)};
 
         final Hand cpuHand = new Hand();
@@ -47,13 +45,13 @@ public class BattleActivity extends AppCompatActivity {
     }
 
     boolean Play(Hand cpuHand, Hand playerHand) {
+        /*
         Card cpuPlay = cpuHand.Pop();
         Card playerPlay = playerHand.Pop();
         cpuPlayView.setImageResource(getResources().getIdentifier(cpuPlay.getFileNameOfCardImage(),
                 "drawable", getPackageName()));
         playerPlayView.setImageResource(getResources().getIdentifier(playerPlay.getFileNameOfCardImage(),
                 "drawable", getPackageName()));
-
         if(cpuPlay.value > playerPlay.value){
             cpuHand.PushBack(cpuPlay);
             cpuHand.PushBack(playerPlay);
@@ -98,6 +96,7 @@ public class BattleActivity extends AppCompatActivity {
         }
         if(cpuHand.Size() <= 0 || playerHand.Size() <= 0)
             return true;
+        */
         return false;
     }
 
@@ -107,11 +106,11 @@ public class BattleActivity extends AppCompatActivity {
 
     void Deal(Hand cpuHand, Hand playedHand){
         Deck deck = new Deck();
-        deck.Shuffle();
-        while(deck.Size() > 0 ) {
-            cpuHand.PushBack(deck.Pop());
-            if(deck.Size() > 0 )
-                playedHand.PushBack(deck.Pop());
+        deck.shuffle();
+        while(deck.size() > 0 ) {
+            cpuHand.pushBack(deck.pop());
+            if(deck.size() > 0 )
+                playedHand.pushBack(deck.pop());
         }
     }
 }
