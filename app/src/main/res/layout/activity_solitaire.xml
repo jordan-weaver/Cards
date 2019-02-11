@@ -12,64 +12,57 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <com.example.cards.CardView
+        <ImageButton
             android:id="@+id/deck"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:padding="2dp"
             android:layout_weight="1"
             android:src="@drawable/card_back" />
 
-        <RelativeLayout
+        <com.example.cards.DrawLayout
             android:id="@+id/draw_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="4dp"
-            android:layout_weight="2">
-            <com.example.cards.CardView
-                android:id="@+id/draw_one"
-                android:layout_width="55dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:src="@drawable/ace_of_diamonds"/>
-            <com.example.cards.CardView
-                android:id="@+id/draw_two"
-                android:layout_width="55dp"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:src="@drawable/ace_of_hearts"/>
-            <com.example.cards.CardView
-                android:id="@+id/draw_three"
-                android:layout_width="55dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ace_of_spades"/>
-        </RelativeLayout>
+            android:layout_weight="2"
+            >
+        </com.example.cards.DrawLayout>
+
         <LinearLayout
             android:id="@+id/foundation"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="right"
             android:layout_weight="4"
             >
             <com.example.cards.CardView
                 android:id="@+id/foundation_one"
-                android:layout_width="55dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="2dp"
                 android:src="@drawable/card_blank" />
             <com.example.cards.CardView
                 android:id="@+id/foundation_two"
-                android:layout_width="55dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="2dp"
                 android:src="@drawable/card_blank" />
             <com.example.cards.CardView
                 android:id="@+id/foundation_three"
-                android:layout_width="55dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="2dp"
                 android:src="@drawable/card_blank" />
             <com.example.cards.CardView
                 android:id="@+id/foundation_four"
-                android:layout_width="55dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="2dp"
                 android:src="@drawable/card_blank" />
         </LinearLayout>
     </LinearLayout>
@@ -107,14 +100,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="1dp">
-            <com.example.cards.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:src="@drawable/five_of_clubs"
-                android:layout_alignParentTop="true"
-                />
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/column_five"

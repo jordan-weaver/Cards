@@ -27,6 +27,10 @@ public class Deck {
         return cards.size();
     }
 
+    void set(ArrayList<Card> _cards) {
+        cards = new ArrayList<>(_cards);
+    }
+
     Card pop() {
         if (cards.size() > 0) {
             return cards.remove(0);
