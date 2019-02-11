@@ -9,6 +9,7 @@ import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 public class SolitaireActivity extends AppCompatActivity {
 

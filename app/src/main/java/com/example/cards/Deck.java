@@ -27,8 +27,10 @@ public class Deck {
         return cards.size();
     }
 
-    void set(ArrayList<Card> _cards) {
-        cards = new ArrayList<>(_cards);
+    void set(Card[] _cards) {
+        cards = new ArrayList<>();
+        for(int i = 0; i < _cards.length; ++i)
+            cards.add(_cards[i]);
     }
 
     Card pop() {

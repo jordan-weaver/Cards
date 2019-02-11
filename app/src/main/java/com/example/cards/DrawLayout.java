@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,6 @@ public class DrawLayout extends RelativeLayout {
     RelativeLayout drawLayout;
     ArrayList<CardView> currentDraw;
     ArrayList<CardView> drawStack;
-    CardView cardToDrag;
 
     public DrawLayout(Context context) {
         super(context);
@@ -41,38 +41,27 @@ public class DrawLayout extends RelativeLayout {
         drawStack = new ArrayList<>();
     }
 
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent event) {
-        super.onInterceptTouchEvent(event);
-        // Consumes touch event on drawn cards. Only the latest available
-        // card will have a disallow enabled.
-        return true;
-    }
-
-    @Override
-    public void requestDisallowInterceptTouchEvent(boolean disallow) {
-        super.requestDisallowInterceptTouchEvent(disallow);
-    }
-
     RelativeLayout.OnDragListener onDragListener = new RelativeLayout.OnDragListener() {
 
         @Override
         public boolean onDrag(View v, DragEvent event) {
             if(event.getAction() == DragEvent.ACTION_DRAG_ENDED) {
                 View view = (View) event.getLocalState(); // dragged card
-                if (view instanceof CardView && view.equals(cardToDrag)) {
+                CardView draggable = currentDraw.get(currentDraw.size() - 1);
+                if (view instanceof CardView && view.equals(draggable)) {
                     if (event.getResult()) { // card was moved
                         //remove card from draw
-                        cardToDrag.getParent().requestDisallowInterceptTouchEvent(false);
-                        currentDraw.remove(cardToDrag);
+                        currentDraw.remove(draggable);
+                        drawLayout.removeView(draggable);
                         if (currentDraw.size() <= 0) {
                             currentDraw.add(drawStack.remove(drawStack.size() - 1));
                         }
                         //set next card in draw to allow touch events
-                        currentDraw.get(currentDraw.size() - 1).getParent().requestDisallowInterceptTouchEvent(true);
+                        draggable = currentDraw.get(currentDraw.size() - 1);
+                        draggable.setOnTouchListener(draggable.cardViewOnTouchListener);
                     } else {
                         // return card to draw
-                        cardToDrag.setVisibility(VISIBLE);
+                        draggable.setVisibility(VISIBLE);
                     }
                 }
             }
@@ -81,8 +70,9 @@ public class DrawLayout extends RelativeLayout {
     };
 
     private void addDrawToStack() {
-        if(currentDraw.size() > 0)
-            currentDraw.get(currentDraw.size() - 1).getParent().requestDisallowInterceptTouchEvent(false);
+        if(currentDraw.size() > 0) {
+            currentDraw.get(currentDraw.size() - 1).setOnTouchListener(null);
+        }
 
         CardView curr;
         while(currentDraw.size() > 0) {
@@ -92,7 +82,7 @@ public class DrawLayout extends RelativeLayout {
                     RelativeLayout.LayoutParams.MATCH_PARENT);
             params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             curr.setLayoutParams(params);
-            drawStack.add(0, curr);
+            drawStack.add(curr);
         }
     }
 
@@ -117,24 +107,27 @@ public class DrawLayout extends RelativeLayout {
             cards[i].setAdjustViewBounds(true);
             cards[i].setPadding(1,1,1,1);
             cards[i].setLayoutParams(params);
+            cards[i].setOnTouchListener(null);
+            currentDraw.add(cards[i]);
             drawLayout.addView(cards[i]);
         }
-        cardToDrag = (CardView) drawLayout.getChildAt(drawLayout.getChildCount() - 1);
-        cardToDrag.getParent().requestDisallowInterceptTouchEvent(true);
+        CardView draggable = currentDraw.get(currentDraw.size() - 1);
+        draggable.setOnTouchListener(draggable.cardViewOnTouchListener);
     }
 
-    public ArrayList<Card> returnDeck() {
+    public Card[] returnDeck() {
         addDrawToStack();
-        ArrayList<Card> result  = new ArrayList<>();
-        while(drawStack.size() > 0) {
-            result.add(drawStack.remove(0).card);
+        Card[] result = new Card[drawStack.size()];
+        CardView cv;
+        for(int i = 0; i < drawStack.size(); ++i) {
+            cv = drawStack.get(i);
+            result[i] = cv.card;
+            //remove views from drawLayout here?
         }
-        while(drawLayout.getChildCount() > 0) {
-            CardView child = (CardView)drawLayout.getChildAt(0);
-            child.setVisibility(GONE);
-        }
+        drawLayout.removeViewsInLayout(0, drawLayout.getChildCount());
         drawStack.clear();
         currentDraw.clear();
+        Toast.makeText(getContext(), "Return deck length: " + result.length, Toast.LENGTH_SHORT).show();
         return result;
     }
 }
