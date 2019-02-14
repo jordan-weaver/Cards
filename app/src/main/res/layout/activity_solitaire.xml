@@ -36,28 +36,28 @@
             android:layout_height="match_parent"
             android:layout_weight="4"
             >
-            <com.example.cards.CardView
+            <com.example.cards.FoundationView
                 android:id="@+id/foundation_one"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="2dp"
                 android:src="@drawable/card_blank" />
-            <com.example.cards.CardView
+            <com.example.cards.FoundationView
                 android:id="@+id/foundation_two"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="2dp"
                 android:src="@drawable/card_blank" />
-            <com.example.cards.CardView
+            <com.example.cards.FoundationView
                 android:id="@+id/foundation_three"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="2dp"
                 android:src="@drawable/card_blank" />
-            <com.example.cards.CardView
+            <com.example.cards.FoundationView
                 android:id="@+id/foundation_four"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -73,55 +73,55 @@
         android:layout_height="0dp"
         android:layout_weight="6"
         android:orientation="horizontal">
-        <RelativeLayout
+        <com.example.cards.ColumnLayout
             android:id="@+id/column_one"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="1dp">
-        </RelativeLayout>
-        <RelativeLayout
+        </com.example.cards.ColumnLayout>
+        <com.example.cards.ColumnLayout
             android:id="@+id/column_two"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="1dp">
-        </RelativeLayout>
-        <RelativeLayout
+        </com.example.cards.ColumnLayout>
+        <com.example.cards.ColumnLayout
             android:id="@+id/column_three"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="1dp">
-        </RelativeLayout>
-        <RelativeLayout
+        </com.example.cards.ColumnLayout>
+        <com.example.cards.ColumnLayout
             android:id="@+id/column_four"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="1dp">
-        </RelativeLayout>
-        <RelativeLayout
+        </com.example.cards.ColumnLayout>
+        <com.example.cards.ColumnLayout
             android:id="@+id/column_five"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="1dp">
-        </RelativeLayout>
-        <RelativeLayout
+        </com.example.cards.ColumnLayout>
+        <com.example.cards.ColumnLayout
             android:id="@+id/column_six"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="1dp">
-        </RelativeLayout>
-        <RelativeLayout
+        </com.example.cards.ColumnLayout>
+        <com.example.cards.ColumnLayout
             android:id="@+id/column_seven"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="1dp">
-        </RelativeLayout>
+        </com.example.cards.ColumnLayout>
 
     </LinearLayout>
 

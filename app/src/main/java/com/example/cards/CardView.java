@@ -48,6 +48,7 @@ public class CardView extends AppCompatImageView {
         imageResource = getResources().getIdentifier(getFileNameOfCardImage(),
                 "drawable", c.getPackageName());
         setImageResource(imageResource);
+        faceDown = false;
     }
 
     void setCard(Card newCard) {
@@ -55,6 +56,13 @@ public class CardView extends AppCompatImageView {
         imageResource = getResources().getIdentifier(getFileNameOfCardImage(),
                 "drawable", getContext().getPackageName());
         setImageResource(imageResource);
+    }
+
+    void setTouchable(boolean val) {
+        if(val)
+            setOnTouchListener(cardViewOnTouchListener);
+        else
+            setOnTouchListener(null);
     }
 
     void setFaceDown(boolean value) {
@@ -149,7 +157,6 @@ public class CardView extends AppCompatImageView {
                     ClipData clipData = ClipData.newPlainText("", "");
                     View.DragShadowBuilder myShadowBuilder = new View.DragShadowBuilder(v);
                     v.startDragAndDrop(clipData, myShadowBuilder, v, 0);
-                    v.setVisibility((View.INVISIBLE));
                     return true;
                 }
             }
@@ -160,24 +167,24 @@ public class CardView extends AppCompatImageView {
     View.OnDragListener cardViewOnDragListener = new View.OnDragListener() {
         @Override
         public boolean onDrag(View v, DragEvent event) {
+            CardView card = (CardView)v;
+            View dragged = (View)event.getLocalState();
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
-                    //Toast.makeText(getContext(), getFileNameOfCardImage() + " started drag", Toast.LENGTH_SHORT).show();
+                    if(dragged instanceof CardView && card.equals(dragged)) {
+                        v.setVisibility(INVISIBLE);
+                        return true;
+                    }
                     break;
                 case DragEvent.ACTION_DRAG_ENTERED:
-                    Toast.makeText(getContext(), getFileNameOfCardImage() + " entered drag", Toast.LENGTH_SHORT).show();
                     break;
                 case DragEvent.ACTION_DRAG_EXITED:
-                    Toast.makeText(getContext(), getFileNameOfCardImage() + " exited drag", Toast.LENGTH_SHORT).show();
                     break;
                 case DragEvent.ACTION_DROP:
-                    Toast.makeText(getContext(), getFileNameOfCardImage() + " dropped on", Toast.LENGTH_SHORT).show();
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
-                    Toast.makeText(getContext(), "ACTION_DRAG_ENDED with result of " + event.getResult(), Toast.LENGTH_SHORT).show();
                     if(!event.getResult()) { // getResult == true if card was moved
-                        View view = (View) event.getLocalState();
-                        view.setVisibility(VISIBLE);
+                        v.setVisibility(VISIBLE);
                     }
                     break;
             }
