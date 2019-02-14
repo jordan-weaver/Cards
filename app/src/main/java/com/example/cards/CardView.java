@@ -172,7 +172,7 @@ public class CardView extends AppCompatImageView {
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
                     if(dragged instanceof CardView && card.equals(dragged)) {
-                        //v.setVisibility(INVISIBLE);
+                        v.setVisibility(INVISIBLE);
                         return true;
                     }
                     break;
@@ -183,9 +183,7 @@ public class CardView extends AppCompatImageView {
                 case DragEvent.ACTION_DROP:
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
-                    if(!event.getResult()) { // getResult == true if card was moved
-                        v.setVisibility(VISIBLE);
-                    }
+                    v.setVisibility(VISIBLE);
                     break;
             }
             return false;

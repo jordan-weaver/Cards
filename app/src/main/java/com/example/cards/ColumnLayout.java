@@ -65,11 +65,14 @@ public class ColumnLayout extends RelativeLayout implements CardHolder {
         else {
             marginSize = 30;
         }
+        //********************************
+        //              TO DO
+        //*********************************
+        // Margin will need to be adjusted based on how many facedown cards there are
+        // numFaceDowns * 20 + numFaceUps * 30
         params.setMargins(0, column.size() * marginSize, 0, 0);
         cv.setScaleType(ImageView.ScaleType.FIT_CENTER);
         cv.setAdjustViewBounds(true);
-        if(getBottomCard() != null)
-            Toast.makeText(getContext(), "Making " + cv.getFileNameOfCardImage() + " Visible under card " + getBottomCard().getFileNameOfCardImage(), Toast.LENGTH_SHORT).show();
         column.add(cv);
         addView(cv, params);
         cv.setVisibility(VISIBLE);
