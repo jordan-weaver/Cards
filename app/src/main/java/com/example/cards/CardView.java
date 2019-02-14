@@ -172,7 +172,7 @@ public class CardView extends AppCompatImageView {
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
                     if(dragged instanceof CardView && card.equals(dragged)) {
-                        v.setVisibility(INVISIBLE);
+                        //v.setVisibility(INVISIBLE);
                         return true;
                     }
                     break;
