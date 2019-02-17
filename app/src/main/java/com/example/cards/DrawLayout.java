@@ -145,7 +145,7 @@ public class DrawLayout extends RelativeLayout implements CardHolder {
             if (remove.equals(draggable)) {
                 currentDraw.remove(draggable);
                 drawLayout.removeView(draggable);
-                if (currentDraw.size() <= 0) {
+                if (currentDraw.size() <= 0 && drawStack.size() > 0) {
                     currentDraw.add(drawStack.remove(drawStack.size() - 1));
                 }
                 // if available set next card in draw to allow touch events

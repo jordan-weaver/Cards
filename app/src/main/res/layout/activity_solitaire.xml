@@ -76,49 +76,49 @@
         <com.example.cards.ColumnLayout
             android:id="@+id/column_one"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="1dp">
         </com.example.cards.ColumnLayout>
         <com.example.cards.ColumnLayout
             android:id="@+id/column_two"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="1dp">
         </com.example.cards.ColumnLayout>
         <com.example.cards.ColumnLayout
             android:id="@+id/column_three"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="1dp">
         </com.example.cards.ColumnLayout>
         <com.example.cards.ColumnLayout
             android:id="@+id/column_four"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="1dp">
         </com.example.cards.ColumnLayout>
         <com.example.cards.ColumnLayout
             android:id="@+id/column_five"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="1dp">
         </com.example.cards.ColumnLayout>
         <com.example.cards.ColumnLayout
             android:id="@+id/column_six"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="1dp">
         </com.example.cards.ColumnLayout>
         <com.example.cards.ColumnLayout
             android:id="@+id/column_seven"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="1dp">
         </com.example.cards.ColumnLayout>

@@ -17,26 +17,31 @@ public class CardView extends AppCompatImageView {
 
     CardView(Context c) {
         super(c);
-        setOnTouchListener(cardViewOnTouchListener);
-        setOnDragListener(cardViewOnDragListener);
+        setOnTouchListener(null);
+        setOnDragListener(null);
         card = null;
+        imageResource = R.drawable.card_blank;
+        setImageResource(imageResource);
+        faceDown = false;
     }
 
     CardView(Context c, AttributeSet attr) {
         super(c, attr);
-        setOnTouchListener(cardViewOnTouchListener);
-        setOnDragListener(cardViewOnDragListener);
+        setOnTouchListener(null);
+        setOnDragListener(null);
         card = null;
         imageResource = R.drawable.card_blank;
+        setImageResource(imageResource);
         faceDown = false;
     }
 
     CardView(Context c, AttributeSet attr, int def) {
         super(c, attr, def);
-        setOnTouchListener(cardViewOnTouchListener);
-        setOnDragListener(cardViewOnDragListener);
+        setOnTouchListener(null);
+        setOnDragListener(null);
         card = null;
         imageResource = R.drawable.card_blank;
+        setImageResource(imageResource);
         faceDown = false;
     }
 
@@ -49,6 +54,32 @@ public class CardView extends AppCompatImageView {
                 "drawable", c.getPackageName());
         setImageResource(imageResource);
         faceDown = false;
+    }
+
+    CardView(Context c, CardView cv) {
+        super(c);
+        card = cv.card;
+        imageResource = cv.imageResource;
+        setImageResource(imageResource);
+        faceDown = cv.faceDown;
+        setOnTouchListener(cardViewOnTouchListener);
+        setOnDragListener(cardViewOnDragListener);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if(other == this)
+            return true;
+
+        if(! (other instanceof CardView))
+            return false;
+
+        CardView cv = (CardView)other;
+        if(this.card == null || cv.card == null)
+            return (this.card == null && cv.card == null);
+
+        return (this.card.value == cv.card.value &&
+                this.card.suit == cv.card.suit);
     }
 
     void setCard(Card newCard) {
