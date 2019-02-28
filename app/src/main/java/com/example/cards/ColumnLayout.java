@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewParent;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.graphics.Paint;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -142,6 +145,9 @@ public class ColumnLayout extends RelativeLayout implements CardHolder {
         if(base == null)
             return dropped.card.value == 13;
 
+        if(base.faceDown)
+            return false;
+
         if(base.card.value - dropped.card.value != 1)
             return false;
 
@@ -237,9 +243,12 @@ public class ColumnLayout extends RelativeLayout implements CardHolder {
                         cv = ((ColumnLayout) view).touched;
                         if(droppable(getBottomCard(), cv))
                             return true;
+                        if(view.equals(v))
+                            return true;
                     }
                     return false;
                 case DragEvent.ACTION_DROP:
+                    Toast.makeText(getContext(), "Drop type " + view.getAccessibilityClassName(), Toast.LENGTH_SHORT).show();
                     ViewParent parentLayout = view.getParent();
                     if(view instanceof ColumnLayout) {
                         ColumnLayout parent = (ColumnLayout)view;
@@ -269,6 +278,8 @@ public class ColumnLayout extends RelativeLayout implements CardHolder {
                         return false;
                     }
                 case DragEvent.ACTION_DRAG_ENDED:
+                    for(int i = 0; i < column.size(); ++i)
+                        column.get(i).setVisibility(VISIBLE);
                     return false;
             }
             return false;
@@ -280,9 +291,15 @@ public class ColumnLayout extends RelativeLayout implements CardHolder {
         ColumnLayout columnLayout;
         ArrayList<CardView> column;
         CardView touched;
+        int cardWidth;
+        int cardHeight;
+        int numCards;
 
         public ColumnDragShadowBuilder(View view) {
             super(view);
+            cardHeight = 0;
+            cardWidth = 0;
+            numCards= 0;
             if(view instanceof ColumnLayout) {
                 columnLayout = (ColumnLayout) view;
                 column = columnLayout.column;
@@ -291,6 +308,9 @@ public class ColumnLayout extends RelativeLayout implements CardHolder {
 
         public ColumnDragShadowBuilder(View view, CardView touched) {
             super(view);
+            cardHeight = 0;
+            cardWidth = 0;
+            numCards = 0;
             if(view instanceof ColumnLayout) {
                 columnLayout = (ColumnLayout) view;
                 column = columnLayout.column;
@@ -310,8 +330,9 @@ public class ColumnLayout extends RelativeLayout implements CardHolder {
                 ++numDown;
             }
             int numUp = column.size() - numDown;
-            int numCards = column.size() - column.indexOf(touched);
-            int cardHeight = shadowSize.y -
+            numCards = column.size() - column.indexOf(touched);
+            cardWidth = shadowSize.x;
+            cardHeight = shadowSize.y -
                     (numDown * columnLayout.MARGIN_FACE_DOWN) -
                     ((numUp - 1) * columnLayout.MARGIN_FACE_UP);
 
@@ -321,7 +342,17 @@ public class ColumnLayout extends RelativeLayout implements CardHolder {
 
         @Override
         public void onDrawShadow(Canvas canvas) {
-            super.onDrawShadow(canvas);
+            //super.onDrawShadow(canvas);
+            Paint paint = new Paint();
+            Bitmap[] bitmaps = new Bitmap[numCards];
+            for(int i = column.indexOf(touched); i < column.size(); ++i) {
+                Bitmap image = BitmapFactory.decodeResource(getResources(), column.get(i).imageResource);
+                Bitmap scaled = Bitmap.createScaledBitmap(image, cardWidth, cardHeight, true);
+                bitmaps[i - column.indexOf(touched)] = scaled;
+            }
+            for(int i = 0; i < bitmaps.length; ++i) {
+                canvas.drawBitmap(bitmaps[i], 0, columnLayout.MARGIN_FACE_UP * i, paint);
+            }
         }
     }
 }
