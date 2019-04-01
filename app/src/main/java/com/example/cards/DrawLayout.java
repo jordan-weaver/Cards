@@ -16,7 +16,6 @@ public class DrawLayout extends RelativeLayout implements CardHolder {
     public DrawLayout(Context context) {
         super(context);
         drawLayout = findViewById(R.id.draw_layout);
-        //drawLayout.setOnDragListener(onDragListener);
         currentDraw = new ArrayList<>();
         drawStack = new ArrayList<>();
     }
@@ -24,7 +23,6 @@ public class DrawLayout extends RelativeLayout implements CardHolder {
     public DrawLayout(Context context, AttributeSet attr) {
         super(context, attr);
         drawLayout = findViewById(R.id.draw_layout);
-        //drawLayout.setOnDragListener(onDragListener);
         currentDraw = new ArrayList<>();
         drawStack = new ArrayList<>();
     }
@@ -32,42 +30,9 @@ public class DrawLayout extends RelativeLayout implements CardHolder {
     public DrawLayout(Context context, AttributeSet attr, int def) {
         super(context, attr, def);
         drawLayout = findViewById(R.id.draw_layout);
-        //drawLayout.setOnDragListener(onDragListener);
         currentDraw = new ArrayList<>();
         drawStack = new ArrayList<>();
     }
-
-    /*
-    RelativeLayout.OnDragListener onDragListener = new RelativeLayout.OnDragListener() {
-
-        @Override
-        public boolean onDrag(View v, DragEvent event) {
-            if(currentDraw.size() <= 0)
-                return false;
-            if(event.getAction() == DragEvent.ACTION_DRAG_ENDED) {
-                View view = (View) event.getLocalState(); // dragged card
-                CardView draggable = currentDraw.get(currentDraw.size() - 1);
-                if (view instanceof CardView && view.equals(draggable)) {
-                    if (event.getResult()) { // card was moved
-                        //remove card from draw
-                        currentDraw.remove(draggable);
-                        drawLayout.removeView(draggable);
-                        if (currentDraw.size() <= 0) {
-                            currentDraw.add(drawStack.remove(drawStack.size() - 1));
-                        }
-                        //set next card in draw to allow touch events
-                        draggable = currentDraw.get(currentDraw.size() - 1);
-                        draggable.setTouchable(true);
-                    } else {
-                        // return card to draw
-                        draggable.setVisibility(VISIBLE);
-                    }
-                }
-            }
-            return true;
-        }
-    };
-    */
 
     private void addDrawToStack() {
         if(currentDraw.size() > 0) {
@@ -93,7 +58,6 @@ public class DrawLayout extends RelativeLayout implements CardHolder {
         for(int i = 0; i < drawStack.size(); ++i) {
             cv = drawStack.get(i);
             result[i] = cv.card;
-            //remove views from drawLayout here?
         }
         drawLayout.removeViewsInLayout(0, drawLayout.getChildCount());
         drawStack.clear();

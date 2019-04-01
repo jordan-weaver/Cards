@@ -77,24 +77,13 @@ public class FoundationView extends CardView implements CardHolder {
                     return true;
                 case DragEvent.ACTION_DRAG_ENDED:
                     if(dropSuccess) {
-                        ViewParent parentLayout = view.getParent();
-                        if(parentLayout instanceof ColumnLayout) {
-                            ArrayList<CardView> list = new ArrayList<>();
-                            list.add((CardView)view);
-                            ((ColumnLayout) parentLayout).removeCards(list);
-                            addCards(list);
-                            return true;
-                        }
-                        else if(parentLayout instanceof DrawLayout) {
-                            ArrayList<CardView> list = new ArrayList<>();
-                            list.add((CardView)view);
-                            ((DrawLayout) parentLayout).removeCards(list);
-                            addCards(list);
-                            return true;
-                        }
-                        else {
-                            return false;
-                        }
+                        CardHolder parentLayout = (CardHolder)view.getParent();
+                        ArrayList<CardView> list = new ArrayList<>();
+                        list.add((CardView)(view));
+                        parentLayout.removeCards(list);
+                        addCards(list);
+                        SolitaireActivity.addMove(new Moves(parentLayout, FoundationView.this, list));
+                        return true;
                     }
                     break;
             }

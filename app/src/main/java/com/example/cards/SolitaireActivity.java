@@ -1,16 +1,20 @@
 package com.example.cards;
 
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class SolitaireActivity extends AppCompatActivity {
 
     Deck deck;
+    public static ArrayList<Moves> moves;
     ImageButton deckView;
+    Button undoButton;
     CardView foundationOneView, foundationTwoView,
                 foundationThreeView, foundationFourView;
     ColumnLayout[] columnLayouts;
@@ -20,8 +24,11 @@ public class SolitaireActivity extends AppCompatActivity {
 
     void initVars() {
         deck = new Deck();
+        moves = new ArrayList<>();
         deckView = findViewById(R.id.deck);
         deckView.setOnClickListener(deckOnClickListener);
+        undoButton = findViewById(R.id.button_undo);
+        undoButton.setOnClickListener(undoButtonOnClickListener);
         foundationOneView = findViewById(R.id.foundation_one);
         foundationTwoView = findViewById(R.id.foundation_two);
         foundationThreeView = findViewById(R.id.foundation_three);
@@ -61,6 +68,41 @@ public class SolitaireActivity extends AppCompatActivity {
             }
         }
     }
+
+    public static void addMove(Moves move) {
+        moves.add(move);
+    }
+
+    Button.OnClickListener undoButtonOnClickListener = new Button.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Moves move;
+            if(moves.size() > 0) {
+                Toast.makeText(getApplicationContext(), "removing move", Toast.LENGTH_SHORT).show();
+                move = moves.remove(moves.size() - 1);
+                switch(move.type) {
+                    case ColumnFlip:
+                        move.cl.getBottomCard().setFaceDown(true);
+                        break;
+                    case Drag:
+                        move.nextParent.removeCards(move.object);
+                        move.prevParent.addCards(move.object);
+
+                     /*
+                    if (move.nextParent instanceof ColumnLayout) {
+                        if (move.prevParent instanceof ColumnLayout) {
+                            ((ColumnLayout) move.nextParent).removeCards(move.object);
+                            ((ColumnLayout) move.prevParent).addCards(move.object);
+                        }
+                    }
+                    */
+                    break;
+                    default:
+                        throw new IllegalArgumentException("Illegal move type");
+                }
+            }
+        }
+    };
 
     ImageButton.OnClickListener deckOnClickListener = new ImageButton.OnClickListener(){
 

@@ -9,7 +9,7 @@
         android:id="@+id/top_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:orientation="horizontal">
 
         <ImageButton
@@ -71,7 +71,7 @@
         android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6"
+        android:layout_weight="11"
         android:orientation="horizontal">
         <com.example.cards.ColumnLayout
             android:id="@+id/column_one"
@@ -123,6 +123,18 @@
             android:layout_margin="1dp">
         </com.example.cards.ColumnLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/button_undo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Undo"/>
     </LinearLayout>
 
 

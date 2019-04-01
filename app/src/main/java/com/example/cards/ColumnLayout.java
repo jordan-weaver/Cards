@@ -194,12 +194,12 @@ public class ColumnLayout extends RelativeLayout implements CardHolder {
             if (touched == null)
                 return false;
 
-            //Toast.makeText(getContext(), touched.getFileNameOfCardImage() + " is touched", Toast.LENGTH_SHORT).show();
             // Let bottom card consume touch event
             if (touched.equals(getBottomCard()))
                 return false;
 
             return true;
+
         }
         if(event.getAction() == MotionEvent.ACTION_UP) {
             touched = null;
@@ -248,35 +248,28 @@ public class ColumnLayout extends RelativeLayout implements CardHolder {
                     }
                     return false;
                 case DragEvent.ACTION_DROP:
-                    Toast.makeText(getContext(), "Drop type " + view.getAccessibilityClassName(), Toast.LENGTH_SHORT).show();
-                    ViewParent parentLayout = view.getParent();
+                    CardHolder parentLayout;
+                    if(view instanceof ColumnLayout)
+                        parentLayout = (ColumnLayout)view;
+                    else
+                        parentLayout = (CardHolder)view.getParent();
+
+                    ArrayList<CardView> list = new ArrayList<CardView>();
                     if(view instanceof ColumnLayout) {
                         ColumnLayout parent = (ColumnLayout)view;
-                        ArrayList<CardView> list = new ArrayList<>();
                         for(int i = parent.column.indexOf(parent.touched); i < parent.column.size(); ++i) {
                             list.add(parent.column.get(i));
                         }
-                        parent.removeCards(list);
-                        addCards(list);
-                        return true;
-                    }
-                    else if(parentLayout instanceof ColumnLayout) {
-                        ArrayList<CardView> list = new ArrayList<CardView>();
-                        list.add((CardView)view);
-                        ((ColumnLayout) parentLayout).removeCards(list);
-                        addCards(list);
-                        return true;
-                    }
-                    else if(parentLayout instanceof DrawLayout) {
-                        ArrayList<CardView> list = new ArrayList<CardView>();
-                        list.add((CardView)view);
-                        ((DrawLayout) parentLayout).removeCards(list);
-                        addCards(list);
-                        return true;
                     }
                     else {
-                        return false;
+                        list.add((CardView)view);
                     }
+
+                    parentLayout.removeCards(list);
+                    addCards(list);
+                    SolitaireActivity.addMove(new Moves(parentLayout, ColumnLayout.this, list));
+                    return true;
+
                 case DragEvent.ACTION_DRAG_ENDED:
                     for(int i = 0; i < column.size(); ++i)
                         column.get(i).setVisibility(VISIBLE);

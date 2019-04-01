@@ -180,10 +180,10 @@ public class CardView extends AppCompatImageView {
                 // flip card if face down
                 if(card.faceDown) {
                     card.setFaceDown(false);
+                    SolitaireActivity.addMove(new Moves((ColumnLayout)getParent()));
                     return true;
                 }
                 //otherwise drag card
-                // TO DO:       implement dragging of columns of cards
                 else {
                     ClipData clipData = ClipData.newPlainText("", "");
                     View.DragShadowBuilder myShadowBuilder = new View.DragShadowBuilder(v);
